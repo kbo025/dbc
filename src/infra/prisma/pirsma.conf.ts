@@ -41,16 +41,14 @@ const auditoryFieldsExt = Prisma.defineExtension({
           operation === 'findFirst' ||
           operation === 'findMany'
         ) {
-          args.where = {
-            ...args.where,
+          Object.assign(args.where, {
             deletedAt: null,
             active: true,
-          };
+          });
         } else if (operation === 'update' || operation === 'updateMany') {
-          args.data = {
-            ...args.data,
+          Object.assign(args.data, {
             updatedAt: new Date(),
-          };
+          });
         }
 
         return query(args);
