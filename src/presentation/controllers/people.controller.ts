@@ -40,7 +40,6 @@ export class PeopleController {
   }
 
   @Get()
-  @HttpCode(HttpStatus.OK)
   async list(
     @Query() params: QueryPeopleDto,
   ): Promise<
@@ -50,7 +49,6 @@ export class PeopleController {
   }
 
   @Get('/:id')
-  @HttpCode(HttpStatus.OK)
   async get(@Param('id', ParseIntPipe) id: number) {
     return await this.peopleService.get(id);
   }

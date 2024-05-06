@@ -1,6 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { AddressDto, CreateAddressDto } from '../dtos/address.dto';
-import { UpdatePeopleDto } from '../dtos/people.dto';
+import {
+  AddressDto,
+  CreateAddressDto,
+  UpdateAddressDto,
+} from '../dtos/address.dto';
 import { AddressPrismaRepository } from 'src/infra/prisma/repositories/AddressPrisma.repository';
 import { CreateAddressByPersonUsecase } from 'src/domain/useCases/addresses/CreateAddressByPerson.usecase';
 import { ListAddressesByPersonUseCase } from 'src/domain/useCases/addresses/ListAddressesByPerson.usecase';
@@ -48,7 +51,7 @@ export class AddresessService {
   async update(
     personId: number,
     id: number,
-    dto: UpdatePeopleDto,
+    dto: UpdateAddressDto,
   ): Promise<AddressDto> {
     const useCase = new UpdateAddressUseCase(this.addressRepository);
     const response = await useCase.execute({ id, personId, ...dto });

@@ -36,6 +36,15 @@ export class PrismaClientExceptionFilter
         );
         break;
       }
+      case 'P2025': {
+        statusCode = HttpStatus.NOT_FOUND;
+        httpAdapter.reply(
+          response,
+          { statusCode, error: 'NOT_FOUND', message: 'Resource not found' },
+          statusCode,
+        );
+        break;
+      }
       default:
         // default 500 error code
         super.catch(exception, host);

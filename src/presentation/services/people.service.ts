@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import {
   CreatePeopleDto,
   FilterPeopleDto,
@@ -49,6 +49,10 @@ export class PeopleService {
   async get(id: number): Promise<PeopleDto> {
     const useCase = new GetPersonUseCase(this.personRepository);
     const response = await useCase.execute({ id });
+
+    if (!response) {
+      throw new NotFoundException('Entity Not Found');
+    }
 
     return plainToInstance(PeopleDto, response, {
       excludeExtraneousValues: true,

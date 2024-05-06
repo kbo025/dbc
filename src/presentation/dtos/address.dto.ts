@@ -1,13 +1,12 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsEnum,
+  IsInt,
   IsNotEmpty,
-  IsNumberString,
   IsOptional,
   IsString,
   MaxLength,
   Min,
-  MinLength,
 } from 'class-validator';
 import { Exclude, Expose } from 'class-transformer';
 import { BaseQueryDto } from 'src/domain/common/paginator/baseQuery.dto';
@@ -28,19 +27,19 @@ export class AddressDto implements IAddressEntity {
 export class CreateAddressDto {
   @ApiProperty({ description: 'Public Location' })
   @IsString()
-  @MinLength(128)
+  @MaxLength(128)
   @IsNotEmpty()
   readonly logradouro: string;
 
   @ApiProperty({ description: 'Number' })
+  @IsInt()
   @Min(1)
   @IsOptional()
   readonly number: number;
 
-  @ApiProperty({ description: 'ID Document of the person' })
-  @IsNumberString()
-  @MinLength(11)
-  @MaxLength(11)
+  @ApiProperty({ description: 'Address District' })
+  @IsString()
+  @MaxLength(128)
   @IsNotEmpty()
   readonly district: string;
 

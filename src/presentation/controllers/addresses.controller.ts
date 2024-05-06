@@ -14,12 +14,15 @@ import {
 import { config } from 'src/config';
 import { ConfigType } from '@nestjs/config';
 import { AddresessService } from '../services/addresess.service';
-import { AddressDto, CreateAddressDto } from '../dtos/address.dto';
-import { UpdatePeopleDto } from '../dtos/people.dto';
+import {
+  AddressDto,
+  CreateAddressDto,
+  UpdateAddressDto,
+} from '../dtos/address.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Addresses')
-@Controller('/addresses')
+@Controller('people/:idPerson/addresses')
 export class AddressesController {
   constructor(
     private readonly addressService: AddresessService,
@@ -55,9 +58,9 @@ export class AddressesController {
   @Patch('/:id')
   @HttpCode(HttpStatus.CREATED)
   async update(
+    @Body() dto: UpdateAddressDto,
     @Param('idPerson', ParseIntPipe) idPerson: number,
     @Param('id', ParseIntPipe) id: number,
-    @Body() dto: UpdatePeopleDto,
   ) {
     return await this.addressService.update(idPerson, id, dto);
   }

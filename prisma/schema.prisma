@@ -31,9 +31,9 @@ model Address {
   id           Int                  @id @default(autoincrement())
   logradouro   String               @db.VarChar(128)
   number       Int
-  district     String               @db.VarChar(128) @unique
-  city         String               @db.VarChar(128) @unique
-  state        String               @db.VarChar(2) @unique
+  district     String               @db.VarChar(128)
+  city         String               @db.VarChar(128)
+  state        String               @db.VarChar(2)
 
   createdAt    DateTime?            @default(now()) @db.Date
   updatedAt    DateTime?            @db.Date
